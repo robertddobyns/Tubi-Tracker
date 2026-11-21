@@ -1,0 +1,93 @@
+/* Position context for the hover controls (only added when the tile is static) */
+.tt-rel { position: relative !important; }
+
+/* Watched: red border + badge */
+a.tt-watched {
+  outline: 4px solid #ff2b2b !important;
+  outline-offset: -4px;
+}
+a.tt-watched::after {
+  content: "WATCHED";
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  z-index: 40;
+  background: #ff2b2b;
+  color: #fff;
+  font: 700 11px/1 system-ui, sans-serif;
+  letter-spacing: 0.04em;
+  padding: 3px 6px;
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+/* Rating badge (top-left) */
+a.tt-tile[data-tt-rating]::before {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  z-index: 40;
+  font-size: 16px;
+  line-height: 1;
+  padding: 3px 5px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+}
+a.tt-tile[data-tt-rating="up"]::before { content: "👍"; }
+a.tt-tile[data-tt-rating="down"]::before { content: "👎"; }
+
+/* Hover controls */
+.tt-controls {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 50;
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+.tt-tile:hover > .tt-controls,
+.tt-tile:focus-within > .tt-controls {
+  opacity: 1;
+  pointer-events: auto;
+}
+.tt-controls button {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.78);
+  color: #fff;
+  font-size: 14px;
+  line-height: 28px;
+  text-align: center;
+  cursor: pointer;
+}
+.tt-controls button:hover { background: rgba(60, 60, 60, 0.95); }
+.tt-controls button.tt-on[data-act="watched"] { background: #ff2b2b; }
+.tt-controls button.tt-on[data-act="up"] { background: #2ecc71; }
+.tt-controls button.tt-on[data-act="down"] { background: #f39c12; }
+
+/* Floating panel on a movie's own page */
+.tt-detail-panel {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2147483000;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0.55;
+  transition: opacity 0.15s;
+}
+.tt-detail-panel:hover { opacity: 1; }
+.tt-detail-panel .tt-controls {
+  position: static;
+  opacity: 1;
+  pointer-events: auto;
+}
+.tt-detail-panel .tt-controls button { width: 34px; height: 34px; line-height: 34px; font-size: 17px; }

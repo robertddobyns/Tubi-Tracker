@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Tubi Watched Tracker",
+  "version": "1.0.0",
+  "description": "Mark Tubi movies as watched (red border) and rate them thumbs up or down.",
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://*.tubitv.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Tubi Watched Tracker"
+  }
+}
